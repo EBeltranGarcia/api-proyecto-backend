@@ -4,11 +4,13 @@ const router = express.Router();
 
 /*-----------------------------------------------------------------------------------------------*/
 
-const {allMovies} = require("../controllers/moviesControllers")
+const {allMovies,insertMovie} = require("../controllers/moviesControllers")
 
 /*-----------------------------------------------------------------------------------------------*/
 
 router.get ("/", allMovies)
+
+router.post ("/insertMovie",insertMovie)
 
 /*-----------------------------------------------------------------------------------------------*/
 
