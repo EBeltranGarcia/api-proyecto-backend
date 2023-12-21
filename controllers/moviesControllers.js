@@ -28,4 +28,19 @@ const insertMovie= (req,res) => {
 
 /*-----------------------------------------------------------------------------------------------*/
 
-module.exports={allMovies,insertMovie}
+const deleteMovie= (req,res) => {
+    let {movieId} = req.body
+    console.log(movieId);
+    
+    dbConnection.query("DELETE FROM movie_info WHERE id=?",[movieId],(error,data)=> {
+        if (error) {
+            res.send(error)
+        } else {
+            res.send("Pelicula eliminada")
+        }
+    })
+}
+
+/*-----------------------------------------------------------------------------------------------*/
+
+module.exports={allMovies,insertMovie,deleteMovie}
