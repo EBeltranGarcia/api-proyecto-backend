@@ -16,12 +16,15 @@ const allMovies = (req,res) => {
 /*-----------------------------------------------------------------------------------------------*/
 
 const insertMovie= (req,res) => {
+
     let {name,genre,duration,rating} = req.body
-    dbConnection.query("INSERT INTO movie_info(name, genre, duration, rating) VALUES (?,?,?,?)",[name,genre,duration,rating],(error,data)=> {
+    let image = "http://localhost:3000/image/"+ req.file.filename
+
+    dbConnection.query("INSERT INTO movie_info(name, genre, duration, rating, image) VALUES (?,?,?,?,?)",[name,genre,duration,rating,image],(error,data)=> {
         if (error) {
             res.send(error)
         } else {
-            res.send("Pelicula cargada")
+            res.send("Loaded movie")
         }
     })
 }
@@ -36,7 +39,7 @@ const deleteMovie= (req,res) => {
         if (error) {
             res.send(error)
         } else {
-            res.send("Pelicula eliminada")
+            res.send("Deleted movie")
         }
     })
 }
