@@ -4,11 +4,12 @@ const dbConnection = require("../config/dbConnection")
 /*-----------------------------------------------------------------------------------------------*/
 
 const allMovies = (req,res) => {
+    
     dbConnection.query("SELECT * FROM movie_info",(error,data)=>{
         if (error) {
-            res.send(error)
+            res.status(500).send(error)
         } else {
-            res.send(data)
+            res.status(200).send(data)
         }
     })
 }
@@ -22,9 +23,9 @@ const insertMovie= (req,res) => {
 
     dbConnection.query("INSERT INTO movie_info(name, genre, duration, rating, image) VALUES (?,?,?,?,?)",[name,genre,duration,rating,image],(error,data)=> {
         if (error) {
-            res.send(error)
+            res.status(500).send(error)
         } else {
-            res.send("Loaded movie")
+            res.status(201).send("Loaded movie")
         }
     })
 }
@@ -32,14 +33,14 @@ const insertMovie= (req,res) => {
 /*-----------------------------------------------------------------------------------------------*/
 
 const deleteMovie= (req,res) => {
+
     let {movieId} = req.body
-    console.log(movieId);
     
     dbConnection.query("DELETE FROM movie_info WHERE id=?",[movieId],(error,data)=> {
         if (error) {
-            res.send(error)
+            res.status(500).send(error)
         } else {
-            res.send("Deleted movie")
+            res.status(202).send("Deleted movie")
         }
     })
 }
@@ -49,13 +50,12 @@ const deleteMovie= (req,res) => {
 const updateMovie = (req,res) => {
 
     let {fieldToEdit,infoToEdit,id} = req.body
-    console.log(req.body);
 
     dbConnection.query(`UPDATE movie_info SET ${fieldToEdit}=? WHERE id=?`,[infoToEdit,id],(error,data)=> {
         if (error) {
-            res.send(error)
+            res.status(500).send(error)
         } else {
-            res.send("Updated Movie")
+            res.status(202).send("Updated Movie")
         }
     })
 }
