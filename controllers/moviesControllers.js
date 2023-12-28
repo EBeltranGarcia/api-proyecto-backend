@@ -46,4 +46,18 @@ const deleteMovie= (req,res) => {
 
 /*-----------------------------------------------------------------------------------------------*/
 
-module.exports={allMovies,insertMovie,deleteMovie}
+const updateMovie = (req,res) => {
+
+    let {fieldToEdit,infoToEdit,id} = req.body
+    console.log(req.body);
+
+    dbConnection.query(`UPDATE movie_info SET ${fieldToEdit}=? WHERE id=?`,[infoToEdit,id],(error,data)=> {
+        if (error) {
+            res.send(error)
+        } else {
+            res.send("Updated Movie")
+        }
+    })
+}
+
+module.exports={allMovies,insertMovie,deleteMovie,updateMovie}
