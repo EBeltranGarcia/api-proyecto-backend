@@ -21,7 +21,7 @@ const allMovies = (req,res) => {
 const insertMovie= (req,res) => {
 
     let {name,genre,duration,rating} = req.body
-    let image = "http://localhost:3000/image/"+ req.file.filename
+    let image = "https://movie-app-37pf.onrender.com/image/"+ req.file.filename
 
     dbConnection.query("INSERT INTO movie_info(name, genre, duration, rating, image) VALUES (?,?,?,?,?)",[name,genre,duration,rating,image],(error,data)=> {
         if (error) {
