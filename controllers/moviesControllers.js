@@ -3,6 +3,7 @@ const dbConnection = require("../config/dbConnection")
 
 /*-----------------------------------------------------------------------------------------------*/
 
+//Traer peliculas de la DB
 const allMovies = (req,res) => {
     
     dbConnection.query("SELECT * FROM movie_info",(error,data)=>{
@@ -16,6 +17,7 @@ const allMovies = (req,res) => {
 
 /*-----------------------------------------------------------------------------------------------*/
 
+//Agregar peliculas al sitio web
 const insertMovie= (req,res) => {
 
     let {name,genre,duration,rating} = req.body
@@ -32,6 +34,7 @@ const insertMovie= (req,res) => {
 
 /*-----------------------------------------------------------------------------------------------*/
 
+//Eliminar peliculas
 const deleteMovie= (req,res) => {
 
     let {movieId} = req.body
@@ -47,6 +50,7 @@ const deleteMovie= (req,res) => {
 
 /*-----------------------------------------------------------------------------------------------*/
 
+//Editar peliculas
 const updateMovie = (req,res) => {
 
     let {fieldToEdit,infoToEdit,id} = req.body
